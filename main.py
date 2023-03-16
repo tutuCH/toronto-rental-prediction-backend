@@ -13,6 +13,10 @@ app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
+@app.route('/')
+def default():
+    return "Flask heroku app"
+
 @app.route('/get-rental-prediction-price', methods=['GET'])
 def get_rental_prediction_price():
     bedroom = request.args.get("bedroom")
