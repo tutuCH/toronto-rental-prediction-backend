@@ -3,6 +3,4 @@ flask_restful
 tensorflow
 pandas
 flask_cors
-sklearn.model_selection
-sklearn.compose
-sklearn.preprocessing
+scikit-learn
