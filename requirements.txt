@@ -44,7 +44,4 @@ wrapt
 yarl
 zipp
 gunicorn
-python-dotenv
-urllib.parse
-os
-json
+python-dotenv==0.17.1
