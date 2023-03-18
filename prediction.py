@@ -1,11 +1,24 @@
-from flask_restful import Api, Resource
 import tensorflow as tf
 import pandas as pd
 # import matplotlib.pyplot as plt
+from flask_restful import Api, Resource
 from sklearn.model_selection import train_test_split
 from sklearn.compose import make_column_transformer
 from sklearn.preprocessing import MinMaxScaler
+import requests as requests
+import json
+import urllib.parse
+import os
+from dotenv import load_dotenv;
 
+load_dotenv()
+
+def getLatLongByAddress(address):
+    res = requests.get( os.getenv('GEOAPIFY_BASE_URL') + urllib.parse.quote(address, safe='') + "&apiKey=" + os.getenv('GEOAPIFY_API_KEY')).json()
+    if res["features"][0]["properties"]["city"] == 'Toronto':
+        return [res["features"][0]["geometry"]["coordinates"][1], res["features"][0]["geometry"]["coordinates"][0]]
+    else: 
+        return "ADDRESS_NOT_IN_TORONTO"
 
 def transformModel(params):
     path_to_model = "./assets/model/toronto_rental_prediction_v2.h5"
