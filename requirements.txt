@@ -47,3 +47,4 @@ gunicorn
 python-dotenv
 urllib.parse
 os
+json
