@@ -45,3 +45,5 @@ yarl
 zipp
 gunicorn
 python-dotenv
+urllib.parse
+os
