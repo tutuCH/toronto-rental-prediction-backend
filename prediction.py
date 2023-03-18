@@ -13,22 +13,22 @@ from dotenv import load_dotenv;
 
 load_dotenv()
 
-def getLatLongByAddress(address):
-    try:
-        base_url = os.getenv('GEOAPIFY_BASE_URL')
-        api_key = os.getenv('GEOAPIFY_API_KEY')
+# def getLatLongByAddress(address):
+#     try:
+#         base_url = os.getenv('GEOAPIFY_BASE_URL')
+#         api_key = os.getenv('GEOAPIFY_API_KEY')
 
-        print("Base URL:", base_url)
-        print("API Key:", api_key)
+#         print("Base URL:", base_url)
+#         print("API Key:", api_key)
 
-        res = requests.get(base_url + urllib.parse.quote(address, safe='') + "&apiKey=" + api_key).json()    
-        # res = requests.get( os.getenv('GEOAPIFY_BASE_URL') + urllib.parse.quote(address, safe='') + "&apiKey=" + os.getenv('GEOAPIFY_API_KEY')).json()
-        if res["features"][0]["properties"]["city"] == 'Toronto':
-            return [res["features"][0]["geometry"]["coordinates"][1], res["features"][0]["geometry"]["coordinates"][0]]
-        else: 
-            return "ADDRESS_NOT_IN_TORONTO"
-    except:
-        return "GEOGRAPH_API_ERROR"
+#         res = requests.get(base_url + urllib.parse.quote(address, safe='') + "&apiKey=" + api_key).json()    
+#         # res = requests.get( os.getenv('GEOAPIFY_BASE_URL') + urllib.parse.quote(address, safe='') + "&apiKey=" + os.getenv('GEOAPIFY_API_KEY')).json()
+#         if res["features"][0]["properties"]["city"] == 'Toronto':
+#             return [res["features"][0]["geometry"]["coordinates"][1], res["features"][0]["geometry"]["coordinates"][0]]
+#         else: 
+#             return "ADDRESS_NOT_IN_TORONTO"
+#     except:
+#         return "GEOGRAPH_API_ERROR"
 
 def transformModel(params):
     path_to_model = "./assets/model/toronto_rental_prediction_v2.h5"

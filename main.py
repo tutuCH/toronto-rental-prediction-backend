@@ -20,19 +20,13 @@ def get_rental_prediction_price():
     bedroom = request.args.get("bedroom")
     bathroom = request.args.get("bathroom")
     den = request.args.get("den")
-    address = request.args.get("address")
+    lat = request.args.get("lat")
+    long = request.args.get("long")
     try:
-        coordinates = prediction.getLatLongByAddress(address)
-        if (coordinates == "ADDRESS_NOT_IN_TORONTO"):
-            return coordinates
+        result = prediction.transformModel([bedroom, bathroom, den, lat, long])
+        return jsonify(str(result))
     except:
-        return "getLatLongByAddress error, address: "+address+"url: "+os.getenv('GEOAPIFY_BASE_URL') + urllib.parse.quote(address, safe='') + "&apiKey=" + os.getenv('GEOAPIFY_API_KEY')
-    else:
-        try:
-            result = prediction.transformModel([bedroom, bathroom, den, coordinates[0], coordinates[1]])
-            return jsonify(str(result))
-        except:
-            return "transformModel error"
+        return "get-rental-prediction-price error"
 
 if __name__ == "__main__":
     app.run(debug=True)
