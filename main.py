@@ -9,7 +9,7 @@ from dotenv import load_dotenv;
 load_dotenv()
 app = Flask(__name__)
 api = Api(app)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "https://tutuch.github.io"]}})
 
 @app.route('/')
 def default():
